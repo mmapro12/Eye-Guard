@@ -26,7 +26,22 @@ while True:
         cv2.line(frame, pointLeft, pointRight, (0, 255, 0), 2)
         cv2.circle(frame, pointLeft, 5, (255, 0, 0), cv2.FILLED)
         cv2.circle(frame, pointRight, 5, (255, 0, 0), cv2.FILLED)
-        
+
+        w, _ = detector.findDistance(pointLeft, pointRight)
+        W = 6.3
+        # print(w)
+
+
+        # Finding Focal Length
+        d = 62
+        f = (w*d)/W
+
+        # IMPORTANT: F (Finding Distance)
+        f = 600
+        d = W*f/w
+        print(d)
+
+
 
     cv2.imshow("Eye Guard", frame)
     if cv2.waitKey(1) == ord(quit_button):
