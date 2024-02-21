@@ -2,12 +2,11 @@ import cv2
 import cvzone
 from cvzone.FaceMeshModule import FaceMeshDetector
 import notifications
-import time
 
-cam_num = 1
+cam_num = int(input("Kamera no(Eğer webcam kullnıyorsanız 1, kullanmıyorsanız 0 yazın):"))
 quit_button = "q"
 
-cap = cv2.VideoCapture(1, cv2.CAP_DSHOW)
+cap = cv2.VideoCapture(cam_num, cv2.CAP_DSHOW)
 detector = FaceMeshDetector(maxFaces=1)
 
 if not cap.isOpened(): quit(f"Camera `{cam_num}` can't open!")
@@ -15,6 +14,8 @@ if not cap.isOpened(): quit(f"Camera `{cam_num}` can't open!")
 
 while True:
     success, frame = cap.read()
+    width = int(cap.get(3))
+    height = int(cap.get(4))
     if not success: quit(f"Camera not useable!")
 
     # Finding faces
@@ -69,3 +70,5 @@ while True:
 
 cv2.release()
 cv2.destroyAllWindows()
+
+# TODO: Resolution problem
