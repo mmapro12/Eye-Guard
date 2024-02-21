@@ -1,6 +1,8 @@
 import cv2
 import cvzone
 from cvzone.FaceMeshModule import FaceMeshDetector
+import notifications
+import time
 
 cam_num = 1
 quit_button = "q"
@@ -42,12 +44,21 @@ while True:
         d = W*f/w
         print(d)
 
+        # Notification System
+
+        # Depth is close
+        if d <= 35:
+            cvzone.putTextRect(frame, "Be careful", (20, 70), 5, 3, (0, 0, 255))
+        else:
+            cvzone.putTextRect(frame, "Good", (20, 70), 5, 3, (0, 255, 0))
+
         # Adding text in the video
         cvzone.putTextRect(frame, 
                            f"Depth: {int(d)} cm", 
                            (face[10][0]-100, face[10][1]-50), 
                            scale=2
                            )
+        
 
 
 
