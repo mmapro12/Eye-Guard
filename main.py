@@ -18,6 +18,16 @@ while True:
     # Finding faces
     frame, faces = detector.findFaceMesh(frame, draw=False)
 
+    if faces:
+        face = faces[0]
+        pointLeft = face[145]
+        pointRight = face[374]
+
+        cv2.line(frame, pointLeft, pointRight, (0, 255, 0), 2)
+        cv2.circle(frame, pointLeft, 5, (255, 0, 0), cv2.FILLED)
+        cv2.circle(frame, pointRight, 5, (255, 0, 0), cv2.FILLED)
+        
+
     cv2.imshow("Eye Guard", frame)
     if cv2.waitKey(1) == ord(quit_button):
         break
