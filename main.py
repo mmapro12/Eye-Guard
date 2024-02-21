@@ -23,9 +23,10 @@ while True:
         pointLeft = face[145]
         pointRight = face[374]
 
-        cv2.line(frame, pointLeft, pointRight, (0, 255, 0), 2)
-        cv2.circle(frame, pointLeft, 5, (255, 0, 0), cv2.FILLED)
-        cv2.circle(frame, pointRight, 5, (255, 0, 0), cv2.FILLED)
+        # Drawing on the eyes
+        # cv2.line(frame, pointLeft, pointRight, (0, 255, 0), 2)
+        # cv2.circle(frame, pointLeft, 5, (255, 0, 0), cv2.FILLED)
+        # cv2.circle(frame, pointRight, 5, (255, 0, 0), cv2.FILLED)
 
         w, _ = detector.findDistance(pointLeft, pointRight)
         W = 6.3
@@ -40,6 +41,13 @@ while True:
         f = 600
         d = W*f/w
         print(d)
+
+        # Adding text in the video
+        cvzone.putTextRect(frame, 
+                           f"Depth: {int(d)} cm", 
+                           (face[10][0]-100, face[10][1]-50), 
+                           scale=2
+                           )
 
 
 
