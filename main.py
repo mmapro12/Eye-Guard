@@ -4,7 +4,7 @@ from cvzone.FaceMeshModule import FaceMeshDetector
 
 
 def main():
-    if cv2.VideoCapture(1, cv2.CAP_DSHOW):
+    if cv2.VideoCapture(1, cv2.CAP_DSHOW).isOpened():
         cam_num = 1
     else:
         cam_num = 0
