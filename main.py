@@ -1,6 +1,7 @@
 import cv2
 import cvzone
 from cvzone.FaceMeshModule import FaceMeshDetector
+import screen_brightness_control as brightness
 
 
 def main():
@@ -18,8 +19,6 @@ def main():
 
     while True:
         success, frame = cap.read()
-        width = int(cap.get(3))
-        height = int(cap.get(4))
         if not success:
             quit(f"Camera not usable!")
 
@@ -31,14 +30,8 @@ def main():
             pointLeft = face[145]
             pointRight = face[374]
 
-            # Drawing on the eyes
-            # cv2.line(frame, pointLeft, pointRight, (0, 255, 0), 2)
-            # cv2.circle(frame, pointLeft, 5, (255, 0, 0), cv2.FILLED)
-            # cv2.circle(frame, pointRight, 5, (255, 0, 0), cv2.FILLED)
-
             w, _ = detector.findDistance(pointLeft, pointRight)
             W = 6.3
-            # print(w)
 
             # Finding Focal Length
             # d = 62
@@ -54,8 +47,10 @@ def main():
             # Depth is close
             if d <= 35:
                 cvzone.putTextRect(frame, "Be careful", (20, 70), 5, 3, (0, 0, 255))
+                brightness.set_brightness(50)
             else:
                 cvzone.putTextRect(frame, "Good", (20, 70), 5, 3, (0, 255, 0))
+                brightness.set_brightness(100)
 
             # Adding text in the video
             cvzone.putTextRect(frame,
